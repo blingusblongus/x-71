@@ -3,6 +3,7 @@ dotenv.config();
 
 import express, { Request, Response } from "express";
 import nasaService from "./services/nasaService";
+import { mapAsteroidNames } from "./utils/mapAsteroidNames";
 
 const PORT = 3000;
 const app = express();
@@ -16,10 +17,14 @@ app.get("/", async (req: Request, res: Response) => {
     if (typeof start_date !== "string" || typeof end_date !== "string" || typeof distance !== "string") {
         return res.status(400).json({ error: true, message: "Required parameters missing" });
     }
+    if (!Number(distance)) {
+        return res.status(400).json({ error: true, message: "Distance must be a number" })
+    }
 
     try {
         const nasaRes = await nasaService.feed(start_date, end_date)
-        res.json(nasaRes);
+        const names = mapAsteroidNames(nasaRes, Number(distance));
+        res.json({ asteroids: names });
     } catch (err) {
         res.status(500).json({ error: true, message: `Error retrieving data: ${err}` })
     }
