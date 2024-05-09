@@ -27,3 +27,4 @@ This API endpoint accepts three required query parameters: `start_date` and `end
 - Containerize
 - Swagger
 - Check 7-day difference before sending to NASA API
+- Add function for drying up error generation
