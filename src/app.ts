@@ -21,7 +21,7 @@ app.get("/", async (req: Request, res: Response) => {
         const nasaRes = await nasaService.feed(start_date, end_date)
         res.json(nasaRes);
     } catch (err) {
-        res.status(500).json({ error: true, message: "Error retrieving data" })
+        res.status(500).json({ error: true, message: `Error retrieving data: ${err}` })
     }
 })
 
