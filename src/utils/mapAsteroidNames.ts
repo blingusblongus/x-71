@@ -13,7 +13,6 @@ export const mapAsteroidNames = (json: NASAResponse, distanceKm: number) => {
                 // TODO: Handle case where this doesn't resolve to a number?
                 return Number(miss.miss_distance.kilometers) <= distanceKm;
             }) > -1) {
-                console.log(JSON.stringify(neo, null, 2))
                 names.push(neo.name);
             }
         }
