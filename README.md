@@ -22,3 +22,8 @@ This API endpoint accepts three required query parameters: `start_date` and `end
 
 - The maximum distance between `start_date` and `end_date` is 7 days. 
 
+## Room For Improvement
+
+- Containerize
+- Swagger
+- Check 7-day difference before sending to NASA API
