@@ -10,17 +10,17 @@ const PORT = 3000;
 const app = express();
 
 app.get("/", async (req: Request, res: Response) => {
-    const { start_date, end_date, distance } = req.query;
+    const { start_date, end_date, within } = req.query;
 
     // Check for required query params
-    if (!start_date || !end_date || !distance) {
+    if (!start_date || !end_date || !within) {
         return res.status(400).json({ error: true, message: "Required parameters missing" });
     }
-    if (typeof start_date !== "string" || typeof end_date !== "string" || typeof distance !== "string") {
+    if (typeof start_date !== "string" || typeof end_date !== "string" || typeof within !== "string") {
         return res.status(400).json({ error: true, message: "Required parameters missing" });
     }
-    if (!Number(distance)) {
-        return res.status(400).json({ error: true, message: "Distance must be a number" })
+    if (isNaN(Number(within))) {
+        return res.status(400).json({ error: true, message: "'within' must be a number" })
     }
 
     // Validate supplied dates
@@ -37,7 +37,7 @@ app.get("/", async (req: Request, res: Response) => {
     // Fetch and map asteroids
     try {
         const nasaRes = await nasaService.feed(start, end)
-        const names = mapAsteroidNames(nasaRes, Number(distance));
+        const names = mapAsteroidNames(nasaRes, Number(within));
         res.status(200).json({ asteroids: names });
     } catch (err) {
         res.status(500).json({ error: true, message: `Error retrieving data: ${err}` })
