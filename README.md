@@ -7,12 +7,22 @@ A simple API to fetch near-miss asteroid data from NASA.
 - node v18+ (`fetch`)
 - npm 
 
+*or*
+
+- Docker
+
 ## Getting Started
 
+Without Docker:
 - Clone Repo: `git clone https://github.com/blingusblongus/x-71 && cd x-71`
 - `npm i` to install dependencies
 - In project root, add `.env` file with `NASA_API_KEY=<your-api-key>`
 - `npm run dev` or `npm run build && npm start`
+
+With Docker:
+- Clone Repo: `git clone https://github.com/blingusblongus/x-71 && cd x-71`
+- In project root, add `.env` file with `NASA_API_KEY=<your-api-key>`
+- With docker running, `docker compose up --build` to build the docker image and launch the program 
 
 ## Usage
 
